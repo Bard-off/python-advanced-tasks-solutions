@@ -1,8 +1,6 @@
 import logging
 import pathlib
 
-log = logging.getLogger(__name__)
-
 BASE_DIR = pathlib.Path(__file__).resolve().parent.parent
 CACHE_DIR = BASE_DIR / "currencies-data-cache"
 

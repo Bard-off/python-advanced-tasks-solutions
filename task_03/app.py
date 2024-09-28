@@ -15,7 +15,7 @@ routes = web.RouteTableDef()
 @routes.get("/rates/{currency}")
 @routes.get("/rates/{currency}/{date}")
 async def get_currency_rates(request: web.Request):
-    currency, selected_date = get_currency_and_date_from_request(request)
+    currency, selected_date = await get_currency_and_date_from_request(request)
     log.info("Fetching %r rates for date = %s", currency, selected_date)
     getter = CurrencyRatesGetter(
         currency=currency,
