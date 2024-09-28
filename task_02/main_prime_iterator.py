@@ -44,6 +44,8 @@ def main() -> None:
     for prime in PrimeIterator(start=20, end=100):
         print(prime)
 
+    print("List of primes:", list(PrimeIterator(start=5, end=70)))
+
 
 if __name__ == "__main__":
     main()
