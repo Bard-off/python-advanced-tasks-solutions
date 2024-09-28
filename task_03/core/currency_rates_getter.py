@@ -52,11 +52,12 @@ class CurrencyRatesGetter:
         )
         return info
 
+    @classmethod
     async def save_cached_currency_info(
-        self,
+        cls,
         info: CurrencyInfo,
     ) -> bytes:
-        filename = self.get_cache_filename(
+        filename = cls.get_cache_filename(
             currency=info.currency,
             for_date=info.date,
         )

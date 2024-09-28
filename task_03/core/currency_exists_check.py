@@ -13,7 +13,7 @@ class CurrencyExistsCheck:
     cached_currencies: set[str] = field(default_factory=set)
 
     @classmethod
-    async def get_all_currencies(cls) -> set[str]:
+    async def get_all_currencies(cls) -> dict[str, str]:
         log.info("Fetch all currencies")
         async with aiohttp.ClientSession() as session:
             async with session.get(config.CURRENCIES_LIST_API_URL) as response:

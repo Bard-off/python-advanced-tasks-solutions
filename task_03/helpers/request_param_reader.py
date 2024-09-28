@@ -10,7 +10,7 @@ async def validate_currency(currency: str) -> str:
         return currency
 
     msg = f"Unknown currency {currency!r}, please try a different one."
-    raise web.HTTPBadRequest(
+    raise web.HTTPNotFound(
         body=json.dumps({"message": msg}),
         reason=msg,
         content_type="application/json",
