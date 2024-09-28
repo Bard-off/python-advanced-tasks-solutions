@@ -9,7 +9,7 @@ log = logging.getLogger(__name__)
 
 
 @Retry(
-    max_retry_count=3,
+    max_retry_count=5,
     initial_timeout=3,
     timeout_multiplier=2,
 )

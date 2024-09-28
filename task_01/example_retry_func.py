@@ -22,7 +22,7 @@ def fetch_weather_example_1(
 
 
 @retry(
-    max_retry_count=3,
+    max_retry_count=5,
     initial_timeout=3,
     timeout_multiplier=2,
 )
