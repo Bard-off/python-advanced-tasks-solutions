@@ -41,6 +41,16 @@ def main():
 
     print()
     print("also circle_a's circumference is", circle_a.circumference)
+    print("also circle_b's circumference is", circle_b.circumference)
+
+    try:
+        circle_b.radius = 0
+    except ValueError as e:
+        print("could not update circle_b.radius, got error:", e)
+    try:
+        rectangle_a.width = -1
+    except ValueError as e:
+        print("could not update rectangle_a.width, got error:", e)
 
 
 if __name__ == "__main__":
