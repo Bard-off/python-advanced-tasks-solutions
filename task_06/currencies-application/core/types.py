@@ -3,8 +3,6 @@ from datetime import date
 from decimal import Decimal
 from typing import TypedDict
 
-# ResponseType = dict[str, str | dict[str, Decimal]]
-
 
 class ResponseType(TypedDict):
     date: str

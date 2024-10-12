@@ -44,10 +44,10 @@ class CurrencyRatesGetter:
                     raise TypeError(f"Expected API to return dict, got {result!r}")
                 return result
 
-    async def read_currency_info_for_date(
+    def prepare_currency_info_from_response_data(
         self,
+        response_data: dict[str, Any],
     ) -> CurrencyInfo:
-        response_data = await self.request_currency_info()
         data: ResponseType = {
             "date": response_data["date"],
             "values": response_data[self.source_currency],
@@ -58,6 +58,12 @@ class CurrencyRatesGetter:
             target_currencies=self.target_currencies,
         )
         return info
+
+    async def read_currency_info_for_date(
+        self,
+    ) -> CurrencyInfo:
+        response_data = await self.request_currency_info()
+        return self.prepare_currency_info_from_response_data(response_data)
 
     @classmethod
     async def save_cached_currency_info(

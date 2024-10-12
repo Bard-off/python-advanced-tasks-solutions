@@ -5,11 +5,17 @@ from aiohttp import web
 from core.currency_exists_check import check
 
 
+UNKNOWN_CURRENCY_MESSAGE_TEMPLATE = (
+    "Unknown currency {currency!r}, please try a different one."
+)
+INVALID_DATE_MESSAGE = "Provided date is not valid, please use ISO format."
+
+
 async def validate_currency(currency: str) -> str:
     if await check.currency_exists(currency):
         return currency
 
-    msg = f"Unknown currency {currency!r}, please try a different one."
+    msg = UNKNOWN_CURRENCY_MESSAGE_TEMPLATE.format(currency=currency)
     raise web.HTTPNotFound(
         body=json.dumps({"message": msg}),
         reason=msg,
@@ -23,7 +29,7 @@ def validate_provided_date(provided_date: str | None) -> date:
         try:
             selected_date = date.fromisoformat(provided_date)
         except ValueError:
-            msg = "Provided date is not valid, please use ISO format."
+            msg = INVALID_DATE_MESSAGE
             raise web.HTTPUnprocessableEntity(
                 body=json.dumps({"message": msg}),
                 reason=msg,
