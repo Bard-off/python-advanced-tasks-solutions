@@ -17,7 +17,7 @@ async def validate_currency(currency: str) -> str:
 
     msg = UNKNOWN_CURRENCY_MESSAGE_TEMPLATE.format(currency=currency)
     raise web.HTTPNotFound(
-        body=json.dumps({"message": msg}),
+        text=json.dumps({"message": msg}),
         reason=msg,
         content_type="application/json",
     )
@@ -31,7 +31,7 @@ def validate_provided_date(provided_date: str | None) -> date:
         except ValueError:
             msg = INVALID_DATE_MESSAGE
             raise web.HTTPUnprocessableEntity(
-                body=json.dumps({"message": msg}),
+                text=json.dumps({"message": msg}),
                 reason=msg,
                 content_type="application/json",
             )
