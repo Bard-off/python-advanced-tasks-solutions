@@ -1,3 +1,5 @@
+# Задание №6
+
 ## Тестирование приложения
 
 - Настройки `pytest`: https://docs.pytest.org/en/latest/reference/customize.html
