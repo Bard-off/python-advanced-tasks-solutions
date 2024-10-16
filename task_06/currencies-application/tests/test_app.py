@@ -67,6 +67,7 @@ class TestGetCurrencyRates:
         mock_currencies_list_response: dict[str, str],
     ) -> None:
         invalid_currency = "some-invalid-currency"
+        # assert invalid_currency not in mock_currencies_list_response
         response = await client.get(f"/rates/{invalid_currency}")
         assert response.status == HTTPStatus.NOT_FOUND, await response.text()
         response_data = await response.json()

@@ -44,7 +44,7 @@ async def get_currency_and_date_from_request(
     currency: str = await validate_currency(
         request.match_info["currency"].lower(),
     )
-    selected_date = validate_provided_date(
+    selected_date: date = validate_provided_date(
         request.match_info.get("date"),
     )
 
