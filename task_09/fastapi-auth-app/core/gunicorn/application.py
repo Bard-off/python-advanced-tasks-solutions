@@ -7,12 +7,12 @@ class Application(BaseApplication):
         self,
         application: FastAPI,
         options: dict | None = None,
-    ):
+    ) -> None:
         self.options = options or {}
         self.application = application
         super().__init__()
 
-    def load(self):
+    def load(self) -> FastAPI:
         return self.application
 
     @property
@@ -26,6 +26,6 @@ class Application(BaseApplication):
             if k in self.cfg.settings and v is not None
         }
 
-    def load_config(self):
+    def load_config(self) -> None:
         for key, value in self.config_options.items():
             self.cfg.set(key.lower(), value)

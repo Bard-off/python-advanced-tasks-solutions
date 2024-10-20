@@ -1,14 +1,11 @@
 from typing import Literal
 
-from pydantic import BaseModel
-from pydantic import PostgresDsn
-from pydantic_settings import (
-    BaseSettings,
-    SettingsConfigDict,
+from pydantic import BaseModel, PostgresDsn
+from pydantic_settings import BaseSettings, SettingsConfigDict
+
+LOG_DEFAULT_FORMAT = (
+    "[%(asctime)s.%(msecs)03d] %(module)10s:%(lineno)-3d %(levelname)-7s - %(message)s"
 )
-
-
-LOG_DEFAULT_FORMAT = "[%(asctime)s.%(msecs)03d] %(module)10s:%(lineno)-3d %(levelname)-7s - %(message)s"
 
 
 class RunConfig(BaseModel):
@@ -25,12 +22,12 @@ class GunicornConfig(BaseModel):
 
 class LoggingConfig(BaseModel):
     log_level: Literal[
-        'debug',
-        'info',
-        'warning',
-        'error',
-        'critical',
-    ] = 'info'
+        "debug",
+        "info",
+        "warning",
+        "error",
+        "critical",
+    ] = "info"
     log_format: str = LOG_DEFAULT_FORMAT
 
 
@@ -60,6 +57,13 @@ class DatabaseConfig(BaseModel):
     }
 
 
+class AccessTokenConfig(BaseModel):
+    # symbols count
+    token_length: int = 32
+    # max age in seconds
+    token_max_age: int = 60 * 60 * 24 * 30
+
+
 class Settings(BaseSettings):
     model_config = SettingsConfigDict(
         env_file=(".env.template", ".env"),
@@ -72,6 +76,7 @@ class Settings(BaseSettings):
     logging: LoggingConfig = LoggingConfig()
     api: ApiPrefix = ApiPrefix()
     db: DatabaseConfig
+    access_token: AccessTokenConfig = AccessTokenConfig()
 
 
 settings = Settings()

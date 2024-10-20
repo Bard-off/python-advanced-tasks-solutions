@@ -8,7 +8,7 @@ from core.gunicorn import Application, get_app_options
 from main import main_app
 
 
-def main():
+def main() -> None:
     Application(
         application=main_app,
         options=get_app_options(

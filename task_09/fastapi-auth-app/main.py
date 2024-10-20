@@ -2,11 +2,9 @@ import logging
 
 import uvicorn
 
-from core.config import settings
-
 from api import router as api_router
+from core.config import settings
 from create_fastapi_app import create_app
-
 
 logging.basicConfig(
     level=logging.getLevelName(settings.logging.log_level),
