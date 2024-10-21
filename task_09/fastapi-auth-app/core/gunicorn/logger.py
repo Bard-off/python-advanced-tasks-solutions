@@ -1,12 +1,13 @@
 from logging import Formatter
 
-from gunicorn.glogging import Logger
+from gunicorn import config  # type: ignore[import-untyped]
+from gunicorn.glogging import Logger  # type: ignore[import-untyped]
 
 from core.config import settings
 
 
 class GunicornLogger(Logger):
-    def setup(self, cfg) -> None:
+    def setup(self, cfg: config.Config) -> None:
         super().setup(cfg)
 
         self._set_handler(

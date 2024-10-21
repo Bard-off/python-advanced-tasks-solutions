@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from gunicorn.app.base import BaseApplication
+from gunicorn.app.base import BaseApplication  # type: ignore[import-untyped]
 
 
 class Application(BaseApplication):

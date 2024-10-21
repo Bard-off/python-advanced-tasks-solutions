@@ -30,7 +30,7 @@ def register_static_docs_routes(app: FastAPI):
             swagger_css_url="https://unpkg.com/swagger-ui-dist@5/swagger-ui.css",
         )
 
-    @app.get(app.swagger_ui_oauth2_redirect_url, include_in_schema=False)
+    @app.get(str(app.swagger_ui_oauth2_redirect_url), include_in_schema=False)
     async def swagger_ui_redirect():
         return get_swagger_ui_oauth2_redirect_html()
 

@@ -7,7 +7,7 @@ from core.config import settings
 from create_fastapi_app import create_app
 
 logging.basicConfig(
-    level=logging.getLevelName(settings.logging.log_level),
+    level=logging.getLevelNamesMapping()[settings.logging.log_level],
     format=settings.logging.log_format,
 )
 

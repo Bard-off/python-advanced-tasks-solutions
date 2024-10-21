@@ -22,12 +22,12 @@ class GunicornConfig(BaseModel):
 
 class LoggingConfig(BaseModel):
     log_level: Literal[
-        "debug",
-        "info",
-        "warning",
-        "error",
-        "critical",
-    ] = "info"
+        "DEBUG",
+        "INFO",
+        "WARNING",
+        "ERROR",
+        "CRITICAL",
+    ] = "INFO"
     log_format: str = LOG_DEFAULT_FORMAT
 
 
@@ -60,8 +60,8 @@ class DatabaseConfig(BaseModel):
 class AccessTokenConfig(BaseModel):
     # symbols count
     token_length: int = 32
-    # max age in seconds
-    token_max_age: int = 60 * 60 * 24 * 30
+    # token age in minutes
+    token_expiration_minutes: int = 60 * 24 * 30
 
 
 class Settings(BaseSettings):
