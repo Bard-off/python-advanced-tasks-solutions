@@ -7,4 +7,4 @@ from .auth import router as auth_router
 router = APIRouter(
     prefix=settings.api.v1.prefix,
 )
-router.include_router(auth_router, prefix="/auth")
+router.include_router(auth_router, prefix=settings.api.v1.auth)
