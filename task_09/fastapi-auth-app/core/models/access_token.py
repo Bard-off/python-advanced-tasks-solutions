@@ -1,5 +1,9 @@
 import secrets
-from datetime import datetime
+from datetime import (
+    UTC,
+    datetime,
+    timedelta,
+)
 from typing import TYPE_CHECKING
 
 from sqlalchemy import ForeignKey, func
@@ -36,3 +40,13 @@ class AccessToken(IntIdPkMixin, Base):
     @classmethod
     def generate_token(cls) -> str:
         return generate_secret_token()
+
+    @property
+    def username(self) -> str:
+        return self.user.username
+
+    @property
+    def is_valid(self) -> bool:
+        delta = settings.access_token.token_expiration_minutes
+        dies_at = self.created_at.replace(tzinfo=UTC) + timedelta(minutes=delta)
+        return dies_at > datetime.now(tz=UTC)
