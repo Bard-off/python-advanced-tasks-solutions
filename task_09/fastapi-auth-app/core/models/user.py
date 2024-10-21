@@ -46,3 +46,9 @@ class User(IntIdPkMixin, Base):
             # hashed value
             self._password,
         )
+
+    def __str__(self) -> str:
+        return f"{self.__class__.__name__}(id={self.id}, username={self.username!r})"
+
+    def __repr__(self) -> str:
+        return str(self)
