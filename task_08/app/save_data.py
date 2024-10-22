@@ -56,5 +56,5 @@ address_saver = DataSaver[UserAddress](
 )
 post_saver = DataSaver[Post](
     data_dir=config.POSTS_DATA_DIR,
-    filename_pattern="post-{id:02d}.json",
+    filename_pattern="post-{id:03d}.json",
 )
