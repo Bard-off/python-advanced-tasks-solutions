@@ -10,6 +10,7 @@ from .base import Base
 from .mixins.int_id_pk import IntIdPkMixin
 
 if TYPE_CHECKING:
+    from .post import Post
     from .user_address import UserAddress
 
 
@@ -19,5 +20,8 @@ class User(IntIdPkMixin, Base):
     email: Mapped[str] = mapped_column(unique=True)
 
     address: Mapped["UserAddress"] = relationship(
+        back_populates="user",
+    )
+    posts: Mapped[list["Post"]] = relationship(
         back_populates="user",
     )
