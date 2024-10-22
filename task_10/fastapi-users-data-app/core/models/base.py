@@ -14,7 +14,8 @@ class Base(DeclarativeBase):
     metadata = MetaData(
         naming_convention=settings.db.naming_convention,
     )
+    __table_name_plural_suffix__ = "s"
 
     @declared_attr.directive
     def __tablename__(cls) -> str:
-        return f"{camel_case_to_snake_case(cls.__name__)}s"
+        return f"{camel_case_to_snake_case(cls.__name__)}{cls.__table_name_plural_suffix__}"
