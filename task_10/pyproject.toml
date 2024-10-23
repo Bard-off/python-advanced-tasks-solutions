@@ -23,15 +23,12 @@ ruff = "^0.7.0"
 mypy = "^1.12.1"
 
 [tool.mypy]
+strict = true
 python_version = "3.12"
 warn_return_any = true
 warn_unused_configs = true
 plugins = [
     "pydantic.mypy",
-]
-exclude = [
-    '^file1\.py$',  # TOML literal string (single-quotes, no escaping necessary)
-    "^file2\\.py$",  # TOML basic string (double-quotes, backslash and other characters need escaping)
 ]
 
 [tool.pydantic-mypy]

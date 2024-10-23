@@ -1,12 +1,14 @@
+from typing import Any
+
 from fastapi import FastAPI
 from gunicorn.app.base import BaseApplication  # type: ignore[import-untyped]
 
 
-class Application(BaseApplication):
+class Application(BaseApplication):  # type: ignore[misc]
     def __init__(
         self,
         application: FastAPI,
-        options: dict | None = None,
+        options: dict[str, Any] | None = None,
     ) -> None:
         self.options = options or {}
         self.application = application
@@ -16,7 +18,7 @@ class Application(BaseApplication):
         return self.application
 
     @property
-    def config_options(self) -> dict:
+    def config_options(self) -> dict[str, Any]:
         return {
             # pair
             k: v

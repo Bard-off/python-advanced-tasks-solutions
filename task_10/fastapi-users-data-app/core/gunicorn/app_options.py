@@ -1,3 +1,5 @@
+from typing import Any
+
 from .logger import GunicornLogger
 
 
@@ -7,7 +9,7 @@ def get_app_options(
     timeout: int,
     workers: int,
     log_level: str,
-) -> dict:
+) -> dict[str, Any]:
     return {
         "accesslog": "-",
         "errorlog": "-",
