@@ -25,6 +25,7 @@ class GetUsersPostsService(BaseService[list[Post]]):
         self.session = session
 
     async def act(self) -> list[Post]:
+        # validate if user exists?
         stmt = (
             select(Post)
             .where(
