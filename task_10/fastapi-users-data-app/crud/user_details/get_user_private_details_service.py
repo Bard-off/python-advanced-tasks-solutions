@@ -24,14 +24,16 @@ class GetUserPrivateDetailsService(BaseService[User | None]):
         token: TokenIntrospect = Depends(get_required_token_introspect),
     ) -> None:
         self.session = session
-        self.token: TokenIntrospect = token
+        self.token = token
 
     async def act(self) -> User | None:
+        # username or email? your choice
         stmt = (
             select(User)
-            .options(joinedload(User.address))
+            .options(
+                joinedload(User.address),
+            )
             .where(
-                # username or email? your choice
                 User.email == self.token.username,
             )
         )

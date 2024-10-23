@@ -36,8 +36,6 @@ async def get_optional_token_introspect(
         Depends(GetOptionalTokenIntrospectService),
     ],
 ) -> TokenIntrospect | None:
-    if not introspect:
-        return None
     try:
         return await introspect()
     except InvalidTokenError:
@@ -53,9 +51,9 @@ async def get_required_token_introspect(
         Depends(get_optional_token_introspect),
     ],
 ) -> TokenIntrospect:
-    if not introspect:
-        raise HTTPException(
-            status_code=status.HTTP_401_UNAUTHORIZED,
-            detail="User not authorized",
-        )
-    return introspect
+    if introspect:
+        return introspect
+    raise HTTPException(
+        status_code=status.HTTP_401_UNAUTHORIZED,
+        detail="User not authorized",
+    )

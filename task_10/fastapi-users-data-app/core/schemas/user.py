@@ -47,4 +47,4 @@ class UserPrivateDetails(UserPrivateDetailsBase):
         from_attributes=True,
     )
 
-    address: UserAddressRead
+    address: UserAddressRead | None
