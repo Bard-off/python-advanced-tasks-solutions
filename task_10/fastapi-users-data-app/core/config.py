@@ -60,6 +60,15 @@ class DatabaseConfig(BaseModel):
     }
 
 
+class AuthApiConfig(BaseModel):
+    base_url: str = "http://localhost:8080/api/v1"
+    introspect_path: str = "/auth/introspect"
+
+    @property
+    def introspect_url(self) -> str:
+        return self.base_url + self.introspect_path
+
+
 class Settings(BaseSettings):
     model_config = SettingsConfigDict(
         env_file=(
@@ -75,6 +84,7 @@ class Settings(BaseSettings):
     logging: LoggingConfig = LoggingConfig()
     api: ApiPrefix = ApiPrefix()
     db: DatabaseConfig
+    auth_api: AuthApiConfig = AuthApiConfig()
 
 
 settings = Settings()
